@@ -40,7 +40,11 @@ struct ContentView: View {
             
             annotationItems: places) { place in
             
-            MapPin(coordinate: place.annotation.coordinate)
+            MapAnnotation(coordinate: place.annotation.coordinate) {
+
+                            Marker(mapItem: place.mapItem)
+
+                        }
             
         }
         
@@ -76,7 +80,21 @@ struct ContentView: View {
             }
         }
     }
-    
+    struct Marker: View {
+        var mapItem: MKMapItem
+
+        var body: some View {
+
+            if let url = mapItem.url {
+
+                Link(destination: url, label: {
+
+                    Image("pizza")
+
+                })
+            }
+        }
+    }
 }
 
 
